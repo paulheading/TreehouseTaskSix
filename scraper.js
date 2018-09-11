@@ -16,9 +16,9 @@ const errorFunc = function(error) {
   const errorLog = `[${errorDate}] ${error.message}`;
 
   // write the error log to file
-  fs.appendFile("scrape-error.log", errorLog, function(err) {
+  fs.appendFile("scraper-error.log", errorLog, function(err) {
     if (err) throw err;
-    console.log("There was an error. It has been logged to scrape-error.log");
+    console.log("There was an error. It has been logged to scraper-error.log");
   });
 };
 
@@ -26,7 +26,6 @@ const url = "http://shirts4mike.com";
 const totalShirts = new Array();
 const shirtsToScrape = [];
 const linksSeen = [];
-const csvHeaders = ["Title", "Price", "ImageURL", "URL", "Time", ];
 
 // promise structure for scrape
 const requestPromise = function(url) {
@@ -138,10 +137,10 @@ function thirdScrape(productPages) {
             img = $(".shirt-picture img").attr("src"),
             shirts = {}; // Create empty JSON object with shirt data
         shirts.Title = title;
-        shirts.Price = price;
-        shirts.ImageURL = url + img; // Log full path URL
-        shirts.URL = productPages[m];
-        shirts.Time = moment().format("MMMM Do YYYY, h:mm:ss a");
+        shirts.Price = ` ${price}`;
+        shirts.ImageURL = ` ${url + img}`; // Log full path URL
+        shirts.URL = ` ${productPages[m]}`;
+        shirts.Time = ` ${moment().format("MMMM Do YYYY, h:mm:ss a")}`;
         totalShirts.push(shirts);
       }
       return totalShirts;
@@ -179,7 +178,7 @@ function scraperDate() {
   // get new date object
   const d = new Date();
   const year = d.getFullYear();
-  const month = (d.getMonth() + 1);
+  const month = `0${(d.getMonth() + 1)}`;
   const day = d.getDate();
 
   return [year, month, day].join('-');
