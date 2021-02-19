@@ -11,9 +11,7 @@ const fs = require("fs");
 
 function printError(error) {
   console.log(
-    "The scraper had an issue with " +
-      url +
-      ". Either the site is down or your connection is bad."
+    `The scraper had an issue with ${url}. Either the site is down or your connection is bad.`
   );
   const errorDate = new Date();
   const errorLog = `[${errorDate}] ${error.message}`;
